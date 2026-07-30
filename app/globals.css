@@ -1,0 +1,206 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   DESIGN TOKENS
+   --------------------------------------------------------------------------
+   Every colour the app uses is declared once here and referenced by role.
+   Dark mode re-declares the same roles with steps chosen for the dark
+   surface — it is a selected palette, not an inverted one.
+
+   The two chart series colours are validated for colour-blind separation
+   against both surfaces (adjacent CVD ΔE 24.7 light / 26.8 dark; the working
+   threshold is 8). Do not substitute them casually.
+   ========================================================================== */
+
+@theme {
+  --color-page: #f9f9f7;
+  --color-surface-1: #fcfcfb;
+  --color-surface-2: #f2f2ee;
+  --color-surface-3: #eae9e3;
+
+  --color-ink: #0b0b0b;
+  --color-ink-2: #52514e;
+  --color-muted: #898781;
+
+  --color-grid: #e1e0d9;
+  --color-axis: #c3c2b7;
+  --color-line: rgba(11, 11, 11, 0.1);
+
+  /* Brand — a fictional institution's own colour, deliberately distinct
+     from both chart series so chrome never impersonates data. */
+  --color-brand: #0b4f4a;
+  --color-brand-ink: #0b4f4a;
+  --color-brand-soft: #e4f0ee;
+  --color-brand-contrast: #ffffff;
+
+  /* Chart series. Slot 1 = money paid in. Slot 2 = interest earned. */
+  --color-series-1: #2a78d6;
+  --color-series-2: #eb6834;
+
+  --color-good: #0ca30c;
+  --color-good-ink: #006300;
+  --color-notice: #8a6100;
+  --color-notice-bg: #fdf4e0;
+  --color-notice-line: #e8d5a8;
+
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-page: #0d0d0d;
+    --color-surface-1: #1a1a19;
+    --color-surface-2: #232322;
+    --color-surface-3: #2c2c2a;
+
+    --color-ink: #ffffff;
+    --color-ink-2: #c3c2b7;
+    --color-muted: #898781;
+
+    --color-grid: #2c2c2a;
+    --color-axis: #383835;
+    --color-line: rgba(255, 255, 255, 0.1);
+
+    --color-brand: #4fb3a6;
+    --color-brand-ink: #4fb3a6;
+    --color-brand-soft: #12312e;
+    --color-brand-contrast: #06211f;
+
+    --color-series-1: #3987e5;
+    --color-series-2: #d95926;
+
+    --color-good: #0ca30c;
+    --color-good-ink: #0ca30c;
+    --color-notice: #e8c882;
+    --color-notice-bg: #2a2314;
+    --color-notice-line: #4a3f22;
+  }
+}
+
+:root[data-theme="dark"] {
+  --color-page: #0d0d0d;
+  --color-surface-1: #1a1a19;
+  --color-surface-2: #232322;
+  --color-surface-3: #2c2c2a;
+
+  --color-ink: #ffffff;
+  --color-ink-2: #c3c2b7;
+  --color-muted: #898781;
+
+  --color-grid: #2c2c2a;
+  --color-axis: #383835;
+  --color-line: rgba(255, 255, 255, 0.1);
+
+  --color-brand: #4fb3a6;
+  --color-brand-ink: #4fb3a6;
+  --color-brand-soft: #12312e;
+  --color-brand-contrast: #06211f;
+
+  --color-series-1: #3987e5;
+  --color-series-2: #d95926;
+
+  --color-good: #0ca30c;
+  --color-good-ink: #0ca30c;
+  --color-notice: #e8c882;
+  --color-notice-bg: #2a2314;
+  --color-notice-line: #4a3f22;
+}
+
+/* ========================================================================== */
+
+* {
+  border-color: var(--color-line);
+}
+
+html {
+  color-scheme: light;
+  -webkit-text-size-adjust: 100%;
+}
+:root[data-theme="dark"] { color-scheme: dark; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { color-scheme: dark; }
+}
+
+body {
+  background: var(--color-page);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-series-1);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+/* Columns of figures align; standalone display numbers stay proportional. */
+.tnum { font-variant-numeric: tabular-nums; }
+
+/* --------------------------------------------------------------------------
+   THE SIMULATION WATERMARK
+   Rides behind the account data so any screenshot of the dashboard carries
+   its own context. Kept light enough to read through comfortably.
+   -------------------------------------------------------------------------- */
+.watermark {
+  position: relative;
+  isolation: isolate;
+}
+.watermark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent 0 12px,
+    color-mix(in srgb, var(--color-ink) 4%, transparent) 12px 13px,
+    transparent 13px 96px
+  );
+}
+.watermark > * { position: relative; z-index: 1; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+.rise { animation: rise 0.4s ease-out both; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   PRINT
+   If anyone prints or saves this to PDF, the disclaimer becomes the loudest
+   thing on the page rather than something that quietly drops off.
+   -------------------------------------------------------------------------- */
+@media print {
+  .no-print { display: none !important; }
+  .print-disclaimer {
+    display: block !important;
+    border: 3px solid #000;
+    padding: 16px;
+    margin-bottom: 20px;
+    font-size: 13pt;
+    line-height: 1.5;
+    font-weight: 700;
+    color: #000;
+    background: #fff;
+  }
+  body { background: #fff; color: #000; }
+  .watermark::before {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      transparent 0 10px,
+      rgba(0, 0, 0, 0.13) 10px 12px,
+      transparent 12px 90px
+    );
+  }
+}
+.print-disclaimer { display: none; }
