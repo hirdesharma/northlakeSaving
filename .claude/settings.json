@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm --version)",
+      "Bash(node scripts/validate_palette.js \"#2a78d6,#eb6834\" --mode light --surface \"#fcfcfb\")",
+      "Bash(node scripts/validate_palette.js \"#3987e5,#d95926\" --mode dark --surface \"#1a1a19\")",
+      "Bash(npm install *)",
+      "Bash(npm view *)",
+      "Bash(node -p \"const p=require\\('./package.json'\\); JSON.stringify\\({...p.dependencies,...p.devDependencies},null,2\\)\")",
+      "Bash(npm run *)",
+      "Bash(npx tsc *)",
+      "Bash(node -e ' *)",
+      "Bash(npx tsx *)",
+      "Bash(npx tsx -e ' *)"
+    ]
+  }
+}
