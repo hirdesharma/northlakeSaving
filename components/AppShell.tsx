@@ -45,10 +45,11 @@ export function AppShell({ children }: { children: ReactNode }) {
     <div className="flex min-h-screen flex-col">
       <header className="sticky top-0 z-30 border-b border-line bg-surface-1/90 backdrop-blur">
         <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5">
             <Link href="/dashboard" className="rounded-md">
               <Wordmark />
             </Link>
+            <span aria-hidden className="hidden text-muted/40 sm:inline">·</span>
             <SimulationChip />
           </div>
 

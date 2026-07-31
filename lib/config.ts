@@ -28,7 +28,7 @@ export const BRAND = {
 export const ACCOUNT_HOLDER = {
   name: "Allan Williams",
   accountLabel: "High-Yield Savings",
-  accountNumberMasked: "••••  ••••  4417",
+  accountNumberMasked: "••••  ••••  82372",
   openedOn: "2019-01-02",
 } as const;
 
