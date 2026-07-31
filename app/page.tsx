@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { BRAND, DEMO_CREDENTIALS, DISCLAIMER_LONG } from "@/lib/config";
+import { BRAND, PREFILL_SIGN_IN, SIGN_IN } from "@/lib/config";
 import { isSignedIn, signIn } from "@/lib/session";
 import { BrandMark } from "@/components/Brand";
 import { SiteFooter } from "@/components/AppShell";
@@ -10,10 +10,13 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 
 export default function SignInPage() {
   const router = useRouter();
-  // Prefilled so the walkthrough is one click. The credentials are printed on
-  // the page anyway — this gate is a demo step, not a security boundary.
-  const [username, setUsername] = useState<string>(DEMO_CREDENTIALS.username);
-  const [password, setPassword] = useState<string>(DEMO_CREDENTIALS.password);
+  const [username, setUsername] = useState<string>(
+    PREFILL_SIGN_IN ? SIGN_IN.username : "",
+  );
+  const [password, setPassword] = useState<string>(
+    PREFILL_SIGN_IN ? SIGN_IN.password : "",
+  );
+  const [remember, setRemember] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
 
@@ -24,10 +27,10 @@ export default function SignInPage() {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     setBusy(true);
-    if (signIn(username, password)) {
+    if (signIn(username, password, remember)) {
       router.push("/dashboard");
     } else {
-      setError("That does not match the demo credentials shown below.");
+      setError("Incorrect username or password.");
       setBusy(false);
     }
   };
@@ -71,6 +74,16 @@ export default function SignInPage() {
               </p>
             )}
 
+            <label className="flex items-center gap-2 text-[12.5px] text-ink-2">
+              <input
+                type="checkbox"
+                checked={remember}
+                onChange={(event) => setRemember(event.target.checked)}
+                className="h-3.5 w-3.5 accent-[var(--color-brand)]"
+              />
+              Keep me signed in
+            </label>
+
             <button
               type="submit"
               disabled={busy}
@@ -80,9 +93,8 @@ export default function SignInPage() {
             </button>
           </form>
 
-          <p className="mt-6 border-t border-line pt-4 text-[11.5px] leading-relaxed text-muted">
-            {DISCLAIMER_LONG}
-          </p>
+          {/* The disclaimer lives in the footer on this page — no need to say
+              it twice on one screen. */}
         </div>
       </div>
 

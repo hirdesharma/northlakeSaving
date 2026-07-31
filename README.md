@@ -19,9 +19,18 @@ npm install
 npm run dev          # http://localhost:3000
 ```
 
-Sign in with **`demo` / `northlake`** — both fields are prefilled, so the
-sign-in button is enough. (The credentials are no longer printed on the page;
-change them in `lib/config.ts` under `DEMO_CREDENTIALS`.)
+Sign in with **`allan.williams` / `Northlake2019`** — both fields are
+prefilled, so the sign-in button is enough.
+
+Change them in `lib/config.ts` under `SIGN_IN`. Set `PREFILL_SIGN_IN = false`
+there for an empty form, which looks more like a real bank login when you are
+presenting.
+
+> The sign-in check runs in the browser. Changing the credentials does not make
+> it secure — both strings are readable by anyone who opens developer tools or
+> reads this repository, and the account data loads whether or not anyone signs
+> in. It is a front door, not a lock. Real per-user accounts need a server; see
+> [Adding a database later](#adding-a-database-later).
 
 | Command | What it does |
 |---|---|

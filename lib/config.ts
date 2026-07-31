@@ -26,7 +26,7 @@ export const BRAND = {
  * cannot read as a specific real person's account.
  */
 export const ACCOUNT_HOLDER = {
-  name: "Jordan Avery",
+  name: "Allan Williams",
   accountLabel: "High-Yield Savings",
   accountNumberMasked: "••••  ••••  4417",
   openedOn: "2019-01-02",
@@ -136,17 +136,31 @@ export const DEFAULT_APR = 0.035;
 
 /**
  * ---------------------------------------------------------------------------
- *  DEMO SIGN-IN
+ *  SIGN-IN
  * ---------------------------------------------------------------------------
  *  A front-end gate so the walkthrough starts from a login screen, exactly as
- *  a real dashboard would. It is NOT security — the credentials are printed on
- *  the sign-in page on purpose, and all model data is public in the bundle.
- *  Swap in Supabase Auth when a real backend is added (see README).
+ *  a real dashboard would.
+ *
+ *  This is NOT security, and it cannot be made into security by changing the
+ *  values below. The check runs in the browser, so both strings are readable
+ *  by anyone who opens developer tools or reads the repository — and all the
+ *  account data ships in the JavaScript bundle regardless of whether anyone
+ *  signs in at all. Treat it as a front door, not a lock.
+ *
+ *  Real per-user accounts need a server. See the Supabase notes in the README.
  */
-export const DEMO_CREDENTIALS = {
-  username: "demo",
-  password: "northlake",
+export const SIGN_IN = {
+  username: "allan.williams",
+  password: "Northlake2019",
 } as const;
+
+/**
+ * Prefill both fields so the demo is a single click.
+ *
+ * Set to `false` for an empty form, which looks more like a real bank login
+ * when presenting — at the cost of having to type the credentials each time.
+ */
+export const PREFILL_SIGN_IN = true;
 
 /**
  * ---------------------------------------------------------------------------
