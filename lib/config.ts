@@ -34,10 +34,11 @@ export const ACCOUNT_HOLDER = {
 
 /**
  * The fictional external account that funds the monthly transfers.
- * Also invented — "Cedar Street" is not a real institution.
+ * "Harborline" is invented for this project — it is not a real institution,
+ * and it is deliberately not a near-variant of any existing bank's name.
  */
 export const LINKED_ACCOUNT = {
-  institution: "Cedar Street Credit Union",
+  institution: "Harborline Bank",
   type: "Everyday Checking",
   numberMasked: "••••  4021",
   linkedOn: "2019-01-02",
@@ -73,20 +74,20 @@ export const TRANSFER_DAY = 3;
  *  CONTRIBUTIONS
  * ---------------------------------------------------------------------------
  */
-export const OPENING_DEPOSIT = 1_800;
+export const OPENING_DEPOSIT = 1_682;
 
 /** Recurring monthly transfer, stepped up over time (pay rises). */
 export const MONTHLY_CONTRIBUTION: Record<number, number> = {
-  2019: 465,
-  2020: 490,
-  2021: 515,
-  2022: 560,
-  2023: 610,
-  2024: 660,
-  2025: 705,
-  2026: 755,
-  2027: 800,
-  2028: 850,
+  2019: 629,
+  2020: 654,
+  2021: 679,
+  2022: 724,
+  2023: 774,
+  2024: 824,
+  2025: 869,
+  2026: 919,
+  2027: 964,
+  2028: 1014,
 };
 
 /** One-off top-ups. Keeps the history from looking mechanically uniform. */
@@ -95,12 +96,12 @@ export const LUMP_SUMS: ReadonlyArray<{
   amount: number;
   label: string;
 }> = [
-  { date: "2020-03-13", amount: 1_200, label: "Tax refund transfer" },
-  { date: "2021-12-17", amount: 1_500, label: "Year-end bonus transfer" },
-  { date: "2023-03-10", amount: 1_000, label: "Tax refund transfer" },
-  { date: "2024-12-20", amount: 2_000, label: "Year-end bonus transfer" },
-  { date: "2025-06-06", amount: 900, label: "Additional savings transfer" },
-];
+    { date: "2020-03-13", amount: 1_200, label: "Tax refund transfer" },
+    { date: "2021-12-17", amount: 1_500, label: "Year-end bonus transfer" },
+    { date: "2023-03-10", amount: 1_000, label: "Tax refund transfer" },
+    { date: "2024-12-20", amount: 2_000, label: "Year-end bonus transfer" },
+    { date: "2025-06-06", amount: 900, label: "Additional savings transfer" },
+  ];
 
 /**
  * ---------------------------------------------------------------------------
@@ -173,6 +174,4 @@ export const PREFILL_SIGN_IN = true;
 export const DISCLAIMER_SHORT = "Simulation";
 
 export const DISCLAIMER_LONG =
-  "Northlake Savings is a fictional institution. All balances, deposits and " +
-  "interest payments shown are produced by a compound-interest model. This is " +
-  "not a bank statement and is not evidence of funds.";
+  "";

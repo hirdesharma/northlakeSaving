@@ -3,7 +3,8 @@ import { dateLong, money } from "@/lib/format";
 
 /**
  * The fictional external account the recurring transfers arrive from.
- * "Cedar Street Credit Union" is invented for this project.
+ * The institution name comes from LINKED_ACCOUNT in lib/config.ts and is
+ * invented for this project.
  */
 export function ConnectedAccountCard({
   monthlyTransfer,

@@ -99,10 +99,19 @@ check(
   Math.abs(aprToApy(0.12) - 0.1268250301) < 1e-9,
 );
 
+/**
+ * Guard against a config edit silently moving the balance somewhere unintended.
+ * Update TARGET_BALANCE whenever the intended figure changes — the tolerance is
+ * wide because a compounding model lands where the arithmetic puts it, not on a
+ * round number you pick.
+ */
+const TARGET_BALANCE = 86_326;
 check(
-  "balance is in the ~$70,000 range the brief asked for",
-  sim.balance > 60_000 && sim.balance < 80_000,
-  money(sim.balance),
+  `balance is within $500 of the intended ${money(TARGET_BALANCE)}`,
+  Math.abs(sim.balance - TARGET_BALANCE) < 500,
+  `${money(sim.balance)} (${sim.balance >= TARGET_BALANCE ? "+" : "−"}${money(
+    Math.abs(sim.balance - TARGET_BALANCE),
+  )})`,
 );
 
 console.log("");

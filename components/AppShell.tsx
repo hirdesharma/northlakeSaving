@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
-import { BRAND, DISCLAIMER_LONG } from "@/lib/config";
+import { DISCLAIMER_LONG } from "@/lib/config";
 import { isSignedIn, signOut } from "@/lib/session";
 import { SimulationChip, Wordmark } from "./Brand";
 import { ThemeToggle } from "./ThemeToggle";
@@ -108,9 +108,6 @@ export function SiteFooter() {
       <div className="mx-auto w-full max-w-6xl px-4 py-5 sm:px-6">
         <p className="max-w-3xl text-[12px] leading-relaxed text-muted">
           {DISCLAIMER_LONG}
-        </p>
-        <p className="mt-2 text-[12px] text-muted">
-          © {new Date().getFullYear()} {BRAND.name}
         </p>
       </div>
     </footer>
