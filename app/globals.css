@@ -5,7 +5,7 @@
    --------------------------------------------------------------------------
    Every colour the app uses is declared once here and referenced by role.
    Dark mode re-declares the same roles with steps chosen for the dark
-   surface — it is a selected palette, not an inverted one.
+   surface — it is a sele cted palette, not an inverted one.
 
    The two chart series colours are validated for colour-blind separation
    against both surfaces (adjacent CVD ΔE 24.7 light / 26.8 dark; the working
